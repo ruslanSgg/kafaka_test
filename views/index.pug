@@ -1,0 +1,10 @@
+extends layout
+
+block content
+  h1= title
+  p Welcome to #{title}
+  div
+    ul(id="messages")
+    form(id="form_mess" action="")
+      input(id="message" autocomplete="off")
+      button
