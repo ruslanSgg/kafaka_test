@@ -26,7 +26,7 @@ Start server:
 
 Open in browser:
 
-- ```http:/localhost:5001```
+- ```http://localhost:5001```
 
 Send message from data.txt:
 
