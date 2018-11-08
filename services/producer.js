@@ -1,4 +1,4 @@
-var kafka = require('kafka-node');
+const kafka = require('kafka-node')
 const Producer = kafka.Producer,
     client = new kafka.Client(),
     producer = new Producer(client);

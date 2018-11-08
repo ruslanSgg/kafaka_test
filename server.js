@@ -41,12 +41,18 @@ http.listen(_PORT, function(){
 
 io.on('connection', function (socket) {
   console.log('connection ! ')
-  socket.emit('news', { hello: 'world' });
+  socket.emit('message', { timestamp: Date.now(), msg: 'world' });
   socket.on('message', function(msg){
     io.emit('message', msg);
   });
 });
 
 consumer.on('message', function (message) {
-    io.emit('message', JSON.stringify(message));
+  let msg = {}
+  try{
+    msg = JSON.parse(message.value || {})
+  } catch(err) {
+    msg = {}
+  }
+  io.emit('message', msg);
 });

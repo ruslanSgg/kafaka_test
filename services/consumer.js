@@ -1,10 +1,11 @@
-var kafka = require('kafka-node'),
-Consumer = kafka.Consumer,
-client = new kafka.Client(),
-consumer = new Consumer(
+const kafka = require('kafka-node')
+const config = require('../config')
+const Consumer = kafka.Consumer
+const client = new kafka.Client()
+const consumer = new Consumer(
     client,
     [
-        { topic: 'top1', partition: 0 }
+        { topic: config.topic, partition: 0 }
     ],
     {
         autoCommit: false

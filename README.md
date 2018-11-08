@@ -1,33 +1,20 @@
 
 ## Start kafka
-
-Set variable
-- ```export DOCKER_KAFKA_HOST=$(ipconfig getifaddr en0)```
-
-Start a cluster:
-
-- ```docker-compose up -d ```
-
-Add more brokers:
-
-- ```docker-compose scale kafka=3```
-
-Destroy a cluster:
-
-- ```docker-compose stop```
+Should be installed Docker.
 
 Install node modules:
 
 - ```npm i```
 
-Start server:
+Start kafka
+- ```npm run kafka```
 
-- ```node server.js```
+Start server
+- ```npm run serv```
 
 Open in browser:
 
 - ```http://localhost:5001```
 
-Send message from data.txt:
-
-- ```node produce.js top1 data.txt```
+Start generate events from events.csv
+- ```npm run sendEvents```

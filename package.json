@@ -4,6 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "serv": "node server.js",
+    "kafka": "export DOCKER_KAFKA_HOST=$(ipconfig getifaddr en0) && docker-compose up -d && docker-compose scale kafka=3",
+    "sendEvents": "node produce.js event.csv",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",

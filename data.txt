@@ -1,8 +1,0 @@
-100 match goal
-250 match penalti
-370 match goal
-890 player fall
-1900 match goal
-1950 match penalti
-3270 match goal
-3390 player fall

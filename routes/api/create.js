@@ -1,4 +1,4 @@
-const producer = require('../../services/kafka')
+const producer = require('../../services/producer')
 module.exports = function(req,res){
     var sentMessage = JSON.stringify(req.body.message);
     payloads = [
