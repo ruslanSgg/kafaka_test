@@ -6,14 +6,16 @@ Install node modules:
 
 - ```yarn```
 
-Start kafka
-- ```yarn kafka```
+Create config file:
+- ```mv src/config/example.development.js src/config/development.js```
+
+Start kafka docker
+- ```yarn kafka:start```
+
+- ```yarn kafka:stop```
 
 Start server
-- ```yarn watch```
-
-Open in browser:
-- ```http://localhost:5001```
+- ```yarn start```
 
 Start generate events from events.csv
 - ```yarn sendEvents```

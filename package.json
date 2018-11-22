@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node ./src/index.js",
     "watch": "nodemon -e js,sql,yml ./src/index.js",
-    "kafka": "export DOCKER_KAFKA_HOST=$(ipconfig getifaddr en0) && docker-compose up -d && docker-compose scale kafka=3",
+    "kafka:start": "export DOCKER_KAFKA_HOST=$(ipconfig getifaddr en0) && docker-compose up -d && docker-compose scale kafka=3",
+    "kafka:stop": "docker-compose stop",
     "sendEvents": "node produce.js event.csv",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
