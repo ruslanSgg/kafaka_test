@@ -11,3 +11,5 @@ node_modules
 
 src/config/development.js
 **/config/development.*
+
+package-lock.json
