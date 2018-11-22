@@ -28,7 +28,6 @@
     "kafka-node": "^3.0.1",
     "knex": "^0.15.2",
     "lodash": "^4.17.11",
-    "node-rdkafka": "^2.4.2",
     "patch": "0.0.1",
     "pg": "^7.6.1",
     "pg-connection-string": "^2.0.0",
