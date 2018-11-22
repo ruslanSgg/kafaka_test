@@ -4,17 +4,16 @@ Should be installed Docker.
 
 Install node modules:
 
-- ```npm i```
+- ```yarn```
 
 Start kafka
-- ```npm run kafka```
+- ```yarn kafka```
 
 Start server
-- ```npm run serv```
+- ```yarn watch```
 
 Open in browser:
-
 - ```http://localhost:5001```
 
 Start generate events from events.csv
-- ```npm run sendEvents```
+- ```yarn sendEvents```
