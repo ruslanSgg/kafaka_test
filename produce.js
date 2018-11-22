@@ -1,11 +1,10 @@
-const producer = require('./services/producer')
-const config = require('./config')
-const csv=require('csvtojson')
-const fs = require('fs');
+const {KafkaProducer} = require('./src/services/kafka')
+const {kafkaConfig} = require('./src/config')
+const kafkaProducer = new KafkaProducer()
+// const uniqid = require('uniqid')
+const csv = require('csvtojson')
 
 const fileTXT = process.argv[2]
-console.log('File: ', fileTXT.trim())
-console.log('Topic: "', config.topic, '"')
 
 function delay(event) {
   return new Promise((resolve, reject) => {
@@ -13,23 +12,22 @@ function delay(event) {
   })
 }
 
-function sendMessage(message) {
-  payloads = [
-      { topic: config.topic , messages: JSON.stringify(message) , partition: 0 }
-  ];
+function createTopick(topics) {
   return new Promise((resolve, reject) => {
-    producer.send(payloads, (err, data) => {
-      if(err) reject(err)
-      console.log('Sending: ', message.type, ':', message.msg)
+    kafkaProducer.producer.createTopics(topics, true, function (err, data) {
+      if (err) reject(err)
       resolve(data)
     })
   })
 }
 
-producer.on('ready', function () {
-  csv()
-    .fromFile(fileTXT)
-    .then((events) => events.map((event) => delay(event).then(sendMessage)))
+kafkaProducer.producer.on('ready', function () {
+  console.log('Kafka producer is ready');
+  createTopick([kafkaConfig.topic]).then((data) => {
+    console.log(`Topic ${kafkaConfig.topic} is created.`, data)
+    return data
+  }).then(() => {return csv().fromFile(fileTXT)})
+    .then((events) => events.map((event) => delay(event).then(kafkaProducer.sendMessage.bind(kafkaProducer))))
     .then((sendAll) => {
       return Promise.all(sendAll)
     })
@@ -38,7 +36,7 @@ producer.on('ready', function () {
       process.exit()
     })
     .catch((err) => {
-      console.error('Erorr: ',err)
+    console.log('Kafka producer error: ', err);
       process.exit()
-    })
+  })
 });

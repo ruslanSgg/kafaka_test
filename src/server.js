@@ -4,9 +4,8 @@ const app = express();
 const http = require('http').Server(app);
 const io = require('socket.io')(http);
 const bodyParser = require('body-parser')
-const routes = require('./routes')
-const producer = require('./services/producer')
-const consumer = require('./services/consumer')
+const routes = require('./routes/index')
+const { consumer, producer } = require('./services/kafka')
 const path = require('path');
 
 app.use( bodyParser.json() );       // to support JSON-encoded bodies
@@ -41,9 +40,9 @@ http.listen(_PORT, function(){
 
 io.on('connection', function (socket) {
   console.log('connection ! ')
-  socket.emit('message', { timestamp: Date.now(), msg: 'world' });
-  socket.on('message', function(msg){
-    io.emit('message', msg);
+  socket.emit('fantasy:live', { timestamp: Date.now(), msg: 'world' });
+  socket.on('fantasy:live', function(msg){
+    io.emit('fantasy:live', msg);
   });
 });
 
@@ -54,5 +53,5 @@ consumer.on('message', function (message) {
   } catch(err) {
     msg = {}
   }
-  io.emit('message', msg);
+  io.emit('fantasy:live', msg);
 });

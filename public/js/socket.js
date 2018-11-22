@@ -20,14 +20,13 @@
     let $btn_sbm = document.getElementById('btn_sbm')
 
     $form.addEventListener('submit', (e) => {
-      console.log('message: ', $mesage.value)
-      socket.emit('message', {type: 'message', timestamp: Date.now(), msg: $mesage.value})
+      socket.emit('fantasy:live', {type: 'message', timestamp: Date.now(), msg: $mesage.value})
       $mesage.value = ''
       e.stopPropagation()
       e.preventDefault()
       return e
     })
-    socket.on('message', function(msg){
+    socket.on('fantasy!:live', function(msg){
       const typeMsg = msg.type || 'msg'
       let $li = document.createElement('LI')
       const textnode = document.createTextNode(msg.msg || '')
